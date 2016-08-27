@@ -1,0 +1,25 @@
+{
+
+	project : {
+		name : 'ld 36',
+		version : '0.0.1',
+		author : 'andreirudenko',
+
+		app : {
+			name : 'ld_36',
+			package : 'com.andreirudenko.ld36'
+		},
+
+		build : {
+			dependencies : {
+				luxe : '*',
+			}
+		},
+
+		files : {
+			assets : 'assets/'
+		}
+
+	}
+
+}

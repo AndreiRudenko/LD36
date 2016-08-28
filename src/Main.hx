@@ -35,6 +35,8 @@ class Main extends luxe.Game {
 		config.window.height = 512;
 		config.window.fullscreen = false;
 
+		// config.preload.texts.push({id:'assets/tilemap.tmx'});
+		
 		return config;
 
 	}

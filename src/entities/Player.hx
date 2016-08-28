@@ -19,6 +19,13 @@ import utils.ShapeDrawer;
 
 import Settings.*;
 
+import luxe.tween.Actuate;
+import luxe.tween.easing.Quad;
+import luxe.tween.easing.Cubic;
+import luxe.tween.easing.Back;
+import luxe.tween.easing.Elastic;
+import luxe.tween.easing.Sine;
+
 
 class Player extends Sprite {
 
@@ -31,7 +38,13 @@ class Player extends Sprite {
 	public var jump:Jump;
 	public var collider:PlayerCollider;
 
+	public var collectedItems:Int = 0;
+
+	var switchGravity_eid:String;
+
 	public function new(_options:SpriteOptions) {
+
+		_options.texture = Luxe.resources.texture('assets/player_01.png');
 
 		super(_options);
 
@@ -53,9 +66,13 @@ class Player extends Sprite {
 		add(jump);
 		add(collider);
 
+		listen_events();
+
 	}
 
 	override public function ondestroy(){
+
+		unlisten_events();
 
 		playerName = null;
 		input = null;
@@ -67,5 +84,45 @@ class Player extends Sprite {
 
 	}
 
+	function switchGravity(dir:Int) {
+
+		switch (dir) {
+			case 0 : {
+				gravity.gravityVector.set_xy(-1,0);
+				Actuate.tween(this, 0.2, { rotation_z:90 } ).ease( Cubic.easeOut );
+
+				// rotation_z = 90;
+			}
+			case 1 : {
+				gravity.gravityVector.set_xy(0,-1);
+				Actuate.tween(this, 0.2, { rotation_z:180 } ).ease( Cubic.easeOut );
+				// rotation_z = 180;
+			}
+			case 2 : {
+				gravity.gravityVector.set_xy(1,0);
+				Actuate.tween(this, 0.2, { rotation_z:270 } ).ease( Cubic.easeOut );
+				// rotation_z = 270;
+			}
+			case 3 : {
+				gravity.gravityVector.set_xy(0,1);
+				Actuate.tween(this, 0.2, { rotation_z:0 } ).ease( Cubic.easeOut );
+				// rotation_z = 0;
+			}
+		}
+
+	}
+
+	function listen_events() {
+
+		switchGravity_eid = Luxe.events.listen('global.switchGravity', switchGravity );
+		// player_landing_eid = events.listen('player.landing', player_landing );
+
+	}
+
+	function unlisten_events() {
+
+		Luxe.events.unlisten(switchGravity_eid);
+		// events.unlisten(player_landing_eid);
+	}
 
 }

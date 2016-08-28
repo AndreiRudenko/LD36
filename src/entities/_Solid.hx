@@ -1,31 +1,28 @@
 package entities;
 
-import luxe.Entity;
+import luxe.Sprite;
+import luxe.options.SpriteOptions;
 import luxe.Vector;
 import luxe.Log.*;
 
 import components.physics.Collider;
 
 
-class Solid extends Entity {
+class Solid extends Sprite {
 
 
 	public var collider(default, null):Collider;
 
 
-	public function new(_options:SolidOptions) {
+	public function new(_options:SpriteOptions) {
 
+		_options.size = def(_options.size, new Vector(32,32));
 		_options.name_unique = true;
 
 		super(_options);
 
 		collider = new Collider();
 		collider.active = false;
-
-		if(_options.size != null){
-			collider.w = _options.size.x;
-			collider.h = _options.size.y;
-		}
 
 		add(collider);
 
@@ -41,11 +38,3 @@ class Solid extends Entity {
 
 	
 }
-
-typedef SolidOptions = {
-
-	> luxe.options.EntityOptions,
-
-	@:optional var size : Vector;
-
-} //SolidOptions

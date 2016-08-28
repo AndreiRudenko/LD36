@@ -1,2 +1,21 @@
 {
+	"textures" : [
+
+		{ "id" : "assets/item_black.png" },
+		{ "id" : "assets/item_blue.png" },
+		{ "id" : "assets/item_green.png" },
+		{ "id" : "assets/item_red.png" },
+		{ "id" : "assets/item_white.png" },
+		{ "id" : "assets/item_yellow.png" },
+		{ "id" : "assets/player_01.png" },
+		{ "id" : "assets/block_01.png" },
+		{ "id" : "assets/tiles.png" }
+		
+	],
+	
+	"text" : [
+
+		{ "id" : "assets/tilemap.tmx" }
+		
+	]
 }

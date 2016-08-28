@@ -38,7 +38,7 @@ class Jump extends Component{
 	var gJumpTimer:Float = 0;
 	var jumpStartPos:Float = 0;
 	var jumpHeight:Float = 0;
-	var minJumpHeight:Float = 24; // 64
+	var minJumpHeight:Float = 8; // 64
 	
 	var gravity:Gravity;
 	var collider:Collider;
@@ -146,9 +146,10 @@ class Jump extends Component{
 					jumpTime += dt;
 					if(inputComp.jump){
 						gravity.gravityScale = 1;
-					} else if(jumpHeight >= minJumpHeight){
+					// } else if(jumpHeight >= minJumpHeight){
+					} else {
 						if(dropJumpVel) {
-							cvel *= 0.618;
+							cvel *= 0.5;
 						} else {
 							gravity.gravityScale = 1;
 						}

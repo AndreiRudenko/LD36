@@ -14,6 +14,8 @@ import utils.Timer;
 
 import entities.Player;
 
+import luxe.resource.Resource.AudioResource;
+
 
 class Main extends luxe.Game {
 
@@ -27,6 +29,12 @@ class Main extends luxe.Game {
 
 	public static var player : Player;
 
+	public static var music_sound : AudioResource;
+
+	public static var selectedLevel (default, set) : Int = 0;
+
+	static var levelsCount : Int = 10;
+
 
 	override function config(config:GameConfig) {
 
@@ -36,7 +44,7 @@ class Main extends luxe.Game {
 		config.window.fullscreen = false;
 
 		// config.preload.texts.push({id:'assets/tilemap.tmx'});
-		
+
 		return config;
 
 	}
@@ -70,29 +78,36 @@ class Main extends luxe.Game {
 		hud_batcher.layer = 2;
 		Luxe.renderer.add_batch(hud_batcher);
 
-		var fps = new utils.FPS({
-			batcher : hud_batcher
-			// color : new Color(1,1,1,1)
-			});
+		// var fps = new utils.FPS({
+		// 	batcher : hud_batcher
+		// 	// color : new Color(1,1,1,1)
+		// 	});
 
 		playScene = new Scene('PlayScene');
 
 		state = new luxe.States({ name:'machine' });
-		state.add( new states.PlayState() );
-		state.set( 'PlayState' );
 
+		state.add( new states.PlayState() );
+		state.add( new states.PauseState() );
+		state.add( new states.MenuState() );
+		state.set( 'menu' );
+
+
+ 		music_sound = Luxe.resources.audio('assets/theme_01.ogg');
+		var handle = Luxe.audio.loop(music_sound.source);
+		Luxe.audio.volume(handle, 0.5);
 
 	}
 
 	override function onkeyup( e:KeyEvent ) {
 
-		if(e.keycode == Key.escape) {
+/*		if(e.keycode == Key.escape) {
 			Luxe.shutdown();
-		}
+		}*/
 
-		if(e.keycode == Key.key_9) {
-			state.set( 'PlayState' );
-		}
+		// if(e.keycode == Key.key_r) {
+		// 	state.set( 'play' );
+		// }
 
 	}
 
@@ -100,6 +115,15 @@ class Main extends luxe.Game {
 
 		Timer.update(dt);
 
+	}
+
+	static function set_selectedLevel(value:Int):Int {
+
+		if(value >= 0 && value <= levelsCount){
+			selectedLevel = value;
+		}
+
+		return selectedLevel;
 	}
 
 }

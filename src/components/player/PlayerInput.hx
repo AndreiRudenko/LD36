@@ -16,47 +16,40 @@ class PlayerInput extends InputComponent {
 
 	override function init()  {
 
-        if(entity.name == 'player'){
-            Luxe.input.bind_key( entity.name + "_left",  Key.key_a );
-            Luxe.input.bind_key( entity.name + "_right", Key.key_d );
-            Luxe.input.bind_key( entity.name + "_up",    Key.key_w );
-            Luxe.input.bind_key( entity.name + "_down",  Key.key_s );
-            Luxe.input.bind_key( entity.name + "_jump",  Key.space );
-            Luxe.input.bind_key( entity.name + "_fire",  Key.lshift );
-        } else if(entity.name == 'player2'){
-            Luxe.input.bind_key( entity.name + "_left",  Key.left );
-            Luxe.input.bind_key( entity.name + "_right", Key.right );
-            Luxe.input.bind_key( entity.name + "_up",    Key.up );
-            Luxe.input.bind_key( entity.name + "_down",  Key.down );
-            Luxe.input.bind_key( entity.name + "_jump",  Key.rctrl );
-            Luxe.input.bind_key( entity.name + "_fire",  Key.rshift );
-        } 
+		Luxe.input.bind_key( entity.name + "_left",  Key.key_a );
+		Luxe.input.bind_key( entity.name + "_right", Key.key_d );
+
+		Luxe.input.bind_key( entity.name + "_left",  Key.left );
+		Luxe.input.bind_key( entity.name + "_right", Key.right );
+
+		Luxe.input.bind_key( entity.name + "_jump",  Key.space );
+		Luxe.input.bind_key( entity.name + "_jump",  Key.key_z );
+		Luxe.input.bind_key( entity.name + "_jump",  Key.up );
+		Luxe.input.bind_key( entity.name + "_jump",  Key.key_w );
 
 	}
 
 	override function update(dt:Float) {
 
-        updateKeys();
+		updateKeys();
 
 	}
 
-    function updateKeys() {
+	function updateKeys() {
 
-        right = Luxe.input.inputdown( entity.name + "_right" );
-        left = Luxe.input.inputdown( entity.name + "_left" );
-        up = Luxe.input.inputdown( entity.name + "_up" );
-        down = Luxe.input.inputdown( entity.name + "_down" );
-        jump = Luxe.input.inputdown( entity.name + "_jump" );
+		right = Luxe.input.inputdown( entity.name + "_right" );
+		left = Luxe.input.inputdown( entity.name + "_left" );
+		jump = Luxe.input.inputdown( entity.name + "_jump" );
 
-        if(left && right){
-            left = right = false;
-        }
+		if(left && right){
+			left = right = false;
+		}
 
-        if(up && down){
-            up = down = false;
-        } 
+		if(up && down){
+			up = down = false;
+		} 
 
-    }
+	}
 
 
 }

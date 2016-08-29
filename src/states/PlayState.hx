@@ -11,7 +11,7 @@ import luxe.Text;
 import physics.Space;
 import utils.ShapeDrawer;
 
-// import luxe.tween.Actuate;
+import luxe.tween.Actuate;
 
 // import entities.Movable;
 import entities.Solid;
@@ -42,13 +42,28 @@ class PlayState extends State {
 
 	var switchGravity_eid:String;
 
+	public var overlay: Sprite;
+
 
 	public function new() {
-		super({ name: 'PlayState' });
+
+		super({ name: 'play' });
 		// stateScene = new Scene('Play');
+
+
 	}
 
 	override function onenter<T>(_:T) {
+
+		overlay = new Sprite({
+			size: Luxe.screen.size,
+			depth : 100,
+			centered: false,
+			color: new Color(1,1,1,0.2)
+		});
+
+		overlay.color.tween(0.4, {a:0});
+
 		lastStateScene = Luxe.scene;
 		Luxe.scene = Main.playScene;
 
@@ -58,7 +73,6 @@ class PlayState extends State {
 		// Luxe.renderer.clear_color = new Color( 0.58, 0.58, 0.58);
 		// Luxe.renderer.clear_color = new Color( 0.18, 0.18, 0.18);
 
-		// createWalls();
 		createMap();
 		createMapCollision();
 
@@ -70,6 +84,9 @@ class PlayState extends State {
 	override function onleave<T>(_:T) {
 
  		unlisten_events();
+
+ 		Actuate.reset();
+
 		// Luxe.timer.reset();
 		if(map != null){
 			map.destroy();
@@ -85,12 +102,13 @@ class PlayState extends State {
 
 		Main.player = null;
 
+
 	}
 
 
 	function createMap() {
 
-		var map_data = Luxe.resources.text('assets/tilemap.tmx').asset.text;
+		var map_data = Luxe.resources.text('assets/level_' + Main.selectedLevel + '.tmx').asset.text;
 
 		map = new TiledMap({ format:'tmx', tiled_file_data: map_data });
 
@@ -124,7 +142,7 @@ class PlayState extends State {
 
 						Main.player = new Player({
 							name : "player",
-							size : new Vector(30,30),
+							size : new Vector(28,28),
 							pos : new Vector(_object.pos.x, _object.pos.y)
 						});
 						
@@ -214,40 +232,34 @@ class PlayState extends State {
 	function switchGravity(dir:Int) {
 
 		switch (dir) {
+			case -1 : {
+				var clr:Color = new Color().rgb(0xffffff);
+				Luxe.renderer.clear_color.tween(2,{ r:clr.r, g:clr.g, b:clr.b});
+
+				Timer.schedule(2).onComplete(
+					function function_name() {
+						Main.selectedLevel++;
+						Main.state.set( 'play' );
+					}
+				);
+
+			}
 			case 0 : {
-				// var clr:Color = new Color().rgb(0xe6d485);
 				var clr:Color = new Color().rgb(0xfff3bf);
 				Luxe.renderer.clear_color.tween(0.2,{ r:clr.r, g:clr.g, b:clr.b});
 
-				// gravity.gravityVector.set_xy(-1,0);
-				// Actuate.tween(this, 0.2, { rotation_z:90 } ).ease( Cubic.easeOut );
-				// Actuate.tween(Luxe.renderer.clear_color, 0.2, { rotation_z:90 } ).ease( Cubic.easeOut );
-
-				// rotation_z = 90;
 			}
 			case 1 : {
 				var clr:Color = new Color().rgb(0xffd5d5);
 				Luxe.renderer.clear_color.tween(0.2,{ r:clr.r, g:clr.g, b:clr.b});
-
-				// gravity.gravityVector.set_xy(0,-1);
-				// Actuate.tween(this, 0.2, { rotation_z:180 } ).ease( Cubic.easeOut );
-				// rotation_z = 180;
 			}
 			case 2 : {
 				var clr:Color = new Color().rgb(0xd2ffd2);
 				Luxe.renderer.clear_color.tween(0.2,{ r:clr.r, g:clr.g, b:clr.b});
-
-				// gravity.gravityVector.set_xy(1,0);
-				// Actuate.tween(this, 0.2, { rotation_z:270 } ).ease( Cubic.easeOut );
-				// rotation_z = 270;
 			}
 			case 3 : {
 				var clr:Color = new Color().rgb(0xd7d7ff);
 				Luxe.renderer.clear_color.tween(0.2,{ r:clr.r, g:clr.g, b:clr.b});
-
-				// gravity.gravityVector.set_xy(0,1);
-				// Actuate.tween(this, 0.2, { rotation_z:0 } ).ease( Cubic.easeOut );
-				// rotation_z = 0;
 			}
 		}
 
@@ -267,106 +279,19 @@ class PlayState extends State {
 	}
 
 
- 
-	function createWalls() {
-/*
-		var up:Solid = new Solid({
-			name : "up wall",
-			// color : new Color(0.5, 0.5, 0.5, 1),
-			size : new Vector(512,32),
-			pos : new Vector(Luxe.screen.mid.x, 16)
-		});
-
-		var down:Solid = new Solid({
-			name : "down wall",
-			// color : new Color(0.5, 0.5, 0.5, 1),
-			size : new Vector(512,32),
-			pos : new Vector(Luxe.screen.mid.x, Luxe.screen.size.y - 16)
-		});
-
-		var left:Solid = new Solid({
-			name : "left wall",
-			// color : new Color(0.5, 0.5, 0.5, 1),
-			size : new Vector(32,512),
-			pos : new Vector(16, Luxe.screen.mid.y)
-		});
-
-		var right:Solid = new Solid({
-			name : "right wall",
-			// color : new Color(0.5, 0.5, 0.5, 1),
-			size : new Vector(32,512),
-			pos : new Vector(Luxe.screen.size.x - 16, Luxe.screen.mid.y)
-		});
-
-		var floor1:Solid = new Solid({
-			name : "floor1",
-			// color : new Color(0.5, 0.5, 0.5, 1),
-			size : new Vector(64,32),
-			pos : new Vector(32 + 64, Luxe.screen.size.y - 16 - 64 - 32)
-		});
-
-
-		block = new Block({
-			name : "block",
-			// color : new Color(0.6, 0.6, 0.6, 1),
-			size : new Vector(32,32),
-			pos : Luxe.screen.mid.clone()
-		});
-
-
-		var itemGreen:ItemGreen = new ItemGreen({
-			name : "ItemGreen",
-			// color : new Color(0.5, 0.5, 0.5, 1),
-			size : new Vector(32,32),
-			pos : new Vector(Luxe.screen.mid.x + 128, Luxe.screen.mid.y + 128)
-		});
-
-		var itemWhite:ItemWhite = new ItemWhite({
-			name : "item",
-			// color : new Color(0.5, 0.5, 0.5, 1),
-			size : new Vector(32,32),
-			pos : new Vector(Luxe.screen.mid.x - 64, Luxe.screen.mid.y + 128)
-		});
-
-
-		Main.player = new Player({
-			name : "player",
-			size : new Vector(30,30),
-			// color : new Color(0.7, 0.7, 0.7, 1),
-			pos : new Vector(Luxe.screen.mid.x - 128, Luxe.screen.mid.y)
-		});
-*/
-	}
-
-
-	override function onkeydown( e:KeyEvent ) {
-	}
+	override function onkeydown( e:KeyEvent ) {}
 
 	override function onkeyup( e:KeyEvent ) {
 
-		if(e.keycode == Key.left) {
-			Luxe.events.fire('player.switchGravity', 0);
+        var is_paused = Main.state.enabled('pause');
 
-			// Main.player.gravity.gravityVector.set_xy(-1, 0);
-			// block.gravity.gravityVector.set_xy(-1, 0);
-		}
-
-		if(e.keycode == Key.right) {
-			Luxe.events.fire('player.switchGravity', 2);
-			// Main.player.gravity.gravityVector.set_xy(1, 0);
-			// block.gravity.gravityVector.set_xy(1, 0);
-		}
-
-		if(e.keycode == Key.up) {
-			Luxe.events.fire('player.switchGravity', 1);
-			// Main.player.gravity.gravityVector.set_xy(0, -1);
-			// block.gravity.gravityVector.set_xy(0, -1);
-		}
-
-		if(e.keycode == Key.down) {
-			Luxe.events.fire('player.switchGravity', 3);
-			// Main.player.gravity.gravityVector.set_xy(0, 1);
-			// block.gravity.gravityVector.set_xy(0, 1);
+            //important menu based keys
+        if(e.keycode == Key.escape) {
+            if(!is_paused) {
+            	Actuate.pauseAll();
+            	Main.playScene.active = false;
+                Main.state.enable('pause');
+            }
 		}
 
 	}

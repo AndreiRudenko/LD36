@@ -21,6 +21,7 @@ class Solid extends Entity {
 
 		collider = new Collider();
 		collider.active = false;
+		collider.type = Collider.SOLID;
 
 		if(_options.size != null){
 			collider.w = _options.size.x;

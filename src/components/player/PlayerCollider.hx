@@ -28,6 +28,42 @@ class PlayerCollider extends Collider{
 
 	}
 
+/*	override function update(dt:Float) {
+		super.update(dt);
+
+		// if((isWasTouching(CollisionFaces.DOWN_SOLID) || isWasTouching(CollisionFaces.UP_SOLID)) && !isGrounded ){
+		// 	entity.events.fire("player.onair");
+		// }
+
+		if(gravity.gravityVector.x != 0){
+
+			if(gravity.gravityVector.x < 0){
+				if(isTouching(CollisionFaces.LEFT) && !isWasTouching(CollisionFaces.LEFT)){
+					entity.events.fire("player.land");
+				}
+			} else {
+				if(isTouching(CollisionFaces.RIGHT) && !isWasTouching(CollisionFaces.RIGHT)){
+					entity.events.fire("player.land");
+				}
+			}
+
+		} else if(gravity.gravityVector.y != 0){
+
+			if(gravity.gravityVector.y < 0){
+				if(isTouching(CollisionFaces.UP) && !isWasTouching(CollisionFaces.UP)){
+					entity.events.fire("player.land");
+				}
+			} else {
+				if(isTouching(CollisionFaces.DOWN) && !isWasTouching(CollisionFaces.DOWN)){
+					entity.events.fire("player.land");
+				}
+			}
+
+		}
+
+	}
+
+*/
 	override function init() {
 
 	    super.init();

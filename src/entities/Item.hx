@@ -22,7 +22,10 @@ class Item extends Sprite {
 
 		super(_options);
 
+		depth = Layers.ITEMS;
+
 		collider = new ItemCollider();
+		collider.type = Collider.ITEM;
 
 		add(collider);
 

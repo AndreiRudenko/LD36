@@ -129,6 +129,8 @@ class Jump extends Component{
 
 			case 0 : { // START
 				if((inputComp.jump && isTouchFloor) || (inputComp.jump && gJumpTimer < ghostJumpTime)) {
+					entity.events.fire('player.jump');
+					
 					cvel = -jumpVelocity * factor * sign;
 					jumpTime = 0;
 					gJumpTimer = ghostJumpTime;

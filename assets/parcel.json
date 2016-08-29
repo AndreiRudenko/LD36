@@ -1,21 +1,73 @@
 {
+
 	"textures" : [
 
-		{ "id" : "assets/item_black.png" },
+		{ "id" : "assets/item_0.png" },
+		{ "id" : "assets/item_1.png" },
+		{ "id" : "assets/item_2.png" },
+		{ "id" : "assets/item_8.png" },
+		{ "id" : "assets/item_4.png" },
+
+		{ "id" : "assets/item_3.png" },
+		{ "id" : "assets/item_10.png" },
+		{ "id" : "assets/item_12.png" },
+		{ "id" : "assets/item_5.png" },
+
+		{ "id" : "assets/item_9.png" },
+		{ "id" : "assets/item_6.png" },
+
+		{ "id" : "assets/item_14.png" },
+		{ "id" : "assets/item_13.png" },
+		{ "id" : "assets/item_7.png" },
+		{ "id" : "assets/item_11.png" },
+
+		{ "id" : "assets/item_15.png" },
+
+
 		{ "id" : "assets/item_blue.png" },
 		{ "id" : "assets/item_green.png" },
 		{ "id" : "assets/item_red.png" },
-		{ "id" : "assets/item_white.png" },
 		{ "id" : "assets/item_yellow.png" },
+
 		{ "id" : "assets/player_01.png" },
+
 		{ "id" : "assets/block_01.png" },
-		{ "id" : "assets/tiles.png" }
+
+		{ "id" : "assets/player_anim.png" },
+		{ "id" : "assets/tiles.png" },
+		{ "id" : "assets/title.png" }
 		
 	],
 	
 	"text" : [
 
-		{ "id" : "assets/tilemap.tmx" }
+		{ "id" : "assets/level_0.tmx" },
+		{ "id" : "assets/level_1.tmx" },
+		{ "id" : "assets/level_2.tmx" },
+		{ "id" : "assets/level_3.tmx" },
+		{ "id" : "assets/level_4.tmx" },
+		{ "id" : "assets/level_5.tmx" },
+		{ "id" : "assets/level_6.tmx" },
+		{ "id" : "assets/level_7.tmx" },
+		{ "id" : "assets/level_8.tmx" },
+		{ "id" : "assets/level_9.tmx" },
+		{ "id" : "assets/level_10.tmx" }
 		
+	],
+
+	"sounds" : [
+		{ "id" : "assets/item_01.ogg", "name" : "item_01", "is_stream" : false },
+		{ "id" : "assets/item_02.ogg", "name" : "item_02", "is_stream" : false },
+		{ "id" : "assets/item_03.ogg", "name" : "item_03", "is_stream" : false },
+		{ "id" : "assets/item_04.ogg", "name" : "item_04", "is_stream" : false },
+		{ "id" : "assets/item_05.ogg", "name" : "item_05", "is_stream" : false },
+		
+		{ "id" : "assets/step_01.ogg", "name" : "step_01", "is_stream" : false },
+		{ "id" : "assets/step_02.ogg", "name" : "step_02", "is_stream" : false },
+
+		{ "id" : "assets/jump.ogg", "name" : "jump", "is_stream" : false },
+		{ "id" : "assets/land.ogg", "name" : "land", "is_stream" : false },
+		{ "id" : "assets/theme_01.ogg", "name" : "theme_01", "is_stream" : false }
 	]
+
 }

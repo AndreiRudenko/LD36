@@ -133,9 +133,9 @@ class Collider extends Component{
 		position = entity.pos.clone();
 		entity.transform.listen_pos(updateColliderPosition);
 
-		var sprite:luxe.Sprite = cast entity;
 
-		if(sprite != null){
+		if(Std.is(entity, luxe.Sprite)){
+			var sprite:luxe.Sprite = cast entity;
 			half.x = sprite.size.x * 0.5;
 			half.y = sprite.size.y * 0.5;
 		}
@@ -252,6 +252,14 @@ class Collider extends Component{
 	inline public function isTouching(dir:Int):Bool{
 
 		if(touching & dir != 0) return true;
+
+		return false;
+
+	}
+
+	inline public function isWasTouching(dir:Int):Bool{
+
+		if(wasTouching & dir != 0) return true;
 
 		return false;
 

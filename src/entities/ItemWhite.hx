@@ -20,10 +20,12 @@ class ItemWhite extends Item {
 	var shakeVector:Vector;
 	var shakeComplete:Bool = true;
 
+	var setTexture_eid:String;
+
 
 	public function new(_options:SpriteOptions) {
 
-		_options.texture = Luxe.resources.texture('assets/item_white.png');
+		_options.texture = Luxe.resources.texture('assets/item_0.png');
 		
 		super(_options);
 		collider.itemType = -1;
@@ -31,9 +33,26 @@ class ItemWhite extends Item {
 
 	}
 
+	override function init() {
+		
+		listen_events();
+
+	}
+
+	override function ondestroy() {
+
+		unlisten_events();
+		super.ondestroy();
+
+	}
+
+
 	override function update(dt:Float):Void {
 
 		if(shakeComplete){
+
+
+			shakeTime = 0.5 - Main.player.collectedItems * 0.1;
 
 			shakeVector = Luxe.utils.geometry.random_point_in_unit_circle().multiplyScalar(6);
 
@@ -52,8 +71,26 @@ class ItemWhite extends Item {
 			
 		}
 
+	}
+
+
+	function setTexture(texId:Int) {
+
+		texture = Luxe.resources.texture('assets/item_' + texId + '.png');
 
 	}
 
+	function listen_events() {
+
+		setTexture_eid = Luxe.events.listen("exitItem.setTexture", setTexture );
+		// player_landing_eid = events.listen('player.landing', player_landing );
+
+	}
+
+	function unlisten_events() {
+
+		Luxe.events.unlisten(setTexture_eid);
+		// events.unlisten(player_landing_eid);
+	}
 
 }

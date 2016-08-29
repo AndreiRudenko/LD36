@@ -102,7 +102,7 @@ class Physics {
 
 	public static function debugUpdate(){
 
-		// physics debug
+/*		// physics debug
 		Luxe.debug.start(name);
 		dbgobj = luxe.debug.ProfilerDebugView.lists.get(name);
 		Luxe.debug.start(name);
@@ -116,7 +116,7 @@ class Physics {
 		Luxe.debug.start(name_Broadphase);
 		dbgobj_Broadphase.start -= time_Broadphase;
 		Luxe.debug.end(name_Broadphase);
-		time_Broadphase = 0;
+		time_Broadphase = 0;*/
 
 	}
 

@@ -146,6 +146,7 @@ class Move extends Component{
 				
 				cvel = Mathf.ApValue(cvel, mSpeed * sign, accel);
 				// applyAccelX(mSpeed);
+				// entity.events.fire('player.walk', true);
 
 			} else if(input.left && cvel * sign >= -mSpeed){
 				if(!sprite.flipx) {
@@ -159,11 +160,13 @@ class Move extends Component{
 
 				cvel = Mathf.ApValue(cvel, -mSpeed * sign, accel);
 				// applyAccelX(-mSpeed);
+				// entity.events.fire('player.walk', true);
 
 			} else {
 
 				cvel = Mathf.ApValue(cvel, 0 , friction);
 				// applyFrictionX();
+				// entity.events.fire('player.walk', false);
 
 			}
 		}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" nextobjectid="11">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="32" columns="4">
+  <image source="tiles.png" width="128" height="256"/>
+ </tileset>
+ <layer name="base" width="16" height="16">
+  <data encoding="csv">
+5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+5,0,0,5,0,0,0,0,0,5,0,0,0,0,0,5,
+5,0,0,5,0,0,0,0,0,5,0,0,0,0,0,5,
+5,0,0,11,5,5,4,0,0,5,0,0,0,0,0,5,
+5,0,0,0,0,0,0,0,0,5,0,0,0,0,0,5,
+5,0,0,0,0,0,0,0,0,5,0,0,0,0,0,5,
+5,0,0,0,0,0,0,0,0,5,0,0,0,0,0,5,
+5,5,4,0,0,0,0,7,5,12,0,0,0,0,0,5,
+5,0,0,0,0,0,0,5,0,0,0,0,2,0,0,5,
+5,0,0,0,0,3,5,5,0,0,0,0,5,0,0,5,
+5,0,0,0,0,0,0,5,0,0,0,0,11,5,5,5,
+5,0,0,0,0,0,0,5,0,0,0,0,0,0,0,5,
+5,5,5,4,0,0,0,11,5,4,0,0,0,0,0,5,
+5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,
+5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,
+5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
+</data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="1" name="player" type="player" x="130" y="66" width="30" height="30"/>
+  <object id="3" name="red" type="itemRed" x="260" y="452" width="24" height="24">
+   <ellipse/>
+  </object>
+  <object id="6" name="green" type="itemGreen" x="34" y="450" width="24" height="24">
+   <ellipse/>
+  </object>
+  <object id="7" name="blue" type="itemBlue" x="257" y="196" width="24" height="24">
+   <ellipse/>
+  </object>
+  <object id="8" name="yellow" type="itemYellow" x="322" y="135" width="24" height="24">
+   <ellipse/>
+  </object>
+  <object id="9" name="end" type="itemWhite" x="35" y="194" width="24" height="24">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
